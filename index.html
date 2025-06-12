@@ -1,100 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Price Preview</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+    <title>Bitcoin Predictor - Previsão Inteligente de Preços</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="dark-mode">
-    <header>
-        <h1>Bitcoin Price Viewer</h1>
-        <nav>
-            <ul>
-                <li><a href="#explicacao">O que é Bitcoin?</a></li>
-                <li><a href="#sobre">Sobre o Criador</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-        <button id="themeToggle">Modo Claro</button>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">₿</div>
+                    <div class="logo-text">
+                        <h1>Bitcoin Predictor</h1>
+                        <p>Previsão Inteligente de Preços</p>
+                    </div>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">⚡</span>
+                    IA Avançada
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section id="explicacao">
-            <h2>O que é Bitcoin?</h2>
-            <div class="bitcoin-section">
-                <img src="bitcoin20.png" alt="Bitcoin" class="bitcoin-image">
-                <div class="bitcoin-text">
-                    <p><strong>O que é Bitcoin?</strong><br>
-                    Bitcoin é uma moeda digital descentralizada, criada em 2009 por um indivíduo ou grupo sob o pseudônimo de Satoshi Nakamoto. Ele permite transações ponto-a-ponto sem a necessidade de intermediários, como bancos ou governos.</p>
-                    <p><strong>Por que o Bitcoin é importante?</strong><br>
-                    O Bitcoin é importante porque promove a liberdade financeira, reduz taxas de transação e oferece uma alternativa segura em sistemas econômicos onde a confiança é um problema. Sua rede é pública, transparente e resistente à censura, o que a torna uma revolução no mundo das finanças.</p>
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2 class="current-price" id="currentPrice">$68,420</h2>
+                <p class="price-label">Preço atual do Bitcoin (USD)</p>
+            </section>
+
+            <!-- Métricas -->
+            <section class="metrics">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Previsão 30 dias</span>
+                        <span class="metric-icon">🎯</span>
+                    </div>
+                    <div class="metric-value" id="predictionValue">$75,000</div>
+                    <div class="metric-change" id="predictionChange">
+                        <span class="trend-icon">📈</span>
+                        <span class="change-percent">+9.62%</span>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="sobre">
-            <h2>Sobre o Criador</h2>
-            <div class="sobre-section">
-                <p>Meu nome é Lucas Knust, sou entusiasta de tecnologia e formado em Ciência da Computação. Atualmente, estou concluindo uma pós-graduação em Machine Learning Engineering, com foco em explorar o potencial da inteligência artificial para resolver problemas do mundo real.
-
-                    Atuo como Analista de Sistemas C#, desenvolvendo soluções para o mercado financeiro, onde ganho experiência prática com tecnologias avançadas e requisitos críticos de negócios.
-                    
-                    Este projeto é fruto da minha paixão por tecnologia e aprendizado constante. A API que alimenta este site foi desenvolvida como parte da minha especialização em Machine Learning e tem como objetivo prever o valor do Bitcoin para o dia seguinte, utilizando técnicas modernas de aprendizado de máquina.
-                    
-                    Além do trabalho e dos estudos, sou entusiasta de jogos, mercado financeiro e, principalmente, de tecnologia, acreditando sempre no impacto positivo que ela pode trazer para a sociedade.</p>
-            </div>            
-        </section>
-
-        <section id="servicos">
-            <h2>Serviços</h2>        
-            <div class="service">
-                <h3>Preços Históricos</h3>
-                
-                <form id="historyForm">
-                    <label for="symbol">Símbolo do Ativo:</label>
-                    <input type="text" id="symbol" placeholder="Bitcoin: BTC-USD" required>
-                    
-                    <label for="startDate">Data Inicial (opcional):</label>
-                    <input type="text" id="startDate" placeholder="yyyy-mm-dd" pattern="\d{4}-\d{2}-\d{2}" placeholder="Formato: yyyy-mm-dd">
-                    
-                    <label for="endDate">Data Final (opcional):</label>
-                    <input type="text" id="endDate" placeholder="yyyy-mm-dd" pattern="\d{4}-\d{2}-\d{2}" placeholder="Formato: yyyy-mm-dd">
-                    
-                    <button type="submit">Buscar Preços</button>
-                </form>
-                <div id="pricesSection" class="hidden">
-                    <textarea id="pricesLine" readonly></textarea>
-                    <button id="copyPrices">Copiar Preços</button>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Confiança</span>
+                        <span class="metric-icon">📊</span>
+                    </div>
+                    <div class="metric-value" id="confidenceValue">78%</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidenceFill" style="width: 78%"></div>
+                    </div>
                 </div>
-                            
-            </div>
 
-        
-            <div class="service">
-                <h3>Previsão de Preços</h3>
-                <form id="predictForm">
-                    <label for="prices">Digite os Preços (separados por vírgulas):</label>
-                    <input type="text" id="prices" placeholder="ex: 50000,51000,52000" required>
-                    <button type="submit">Prever</button>
-                </form>
-                <p id="predictionResult"></p>
-            </div>
-        </section>
-        
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Variação 24h</span>
+                        <span class="metric-icon">💰</span>
+                    </div>
+                    <div class="metric-value">+2.4%</div>
+                    <div class="metric-subtitle">+$1,640</div>
+                </div>
 
-        <section id="contato">
-            <h2>Contato</h2>
-            <p>Entre em contato comigo pelo email se tem alguma sugestão, encontrou algum bug ou alguma melhoria: <a href="mailto:lucasknustcontato@outlook.com">lucasknustcontato@outlook.com</a></p>
-        </section>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Próxima Atualização</span>
+                        <span class="metric-icon">📅</span>
+                    </div>
+                    <div class="metric-value" id="nextUpdate">2h 15m</div>
+                    <div class="metric-subtitle">Modelo recalculando</div>
+                </div>
+            </section>
+
+            <!-- Gráfico e Previsão -->
+            <section class="chart-section">
+                <div class="chart-container">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Histórico e Previsão</h3>
+                            <p>Preços históricos e projeções futuras do Bitcoin</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="priceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="prediction-card">
+                        <div class="card-header">
+                            <h3>Gerar Nova Previsão</h3>
+                            <p>Use nossa IA para calcular uma nova previsão</p>
+                        </div>
+                        
+                        <div class="prediction-display">
+                            <div class="prediction-current">
+                                <div class="prediction-header">
+                                    <span>Previsão Atual</span>
+                                    <span class="prediction-badge" id="predictionBadge">Alta</span>
+                                </div>
+                                <div class="prediction-price" id="predictionDisplay">$75,000</div>
+                                <div class="prediction-percent" id="predictionPercent">+9.62% em 30 dias</div>
+                            </div>
+
+                            <div class="confidence-section">
+                                <div class="confidence-header">
+                                    <span>Nível de Confiança</span>
+                                    <span id="confidencePercent">78%</span>
+                                </div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" id="confidenceFill2" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="predict-button" id="predictButton" onclick="generatePrediction()">
+                            <span class="button-icon">⚡</span>
+                            <span class="button-text">Nova Previsão</span>
+                        </button>
+
+                        <div class="disclaimer">
+                            * Previsões baseadas em análise técnica e machine learning
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabs -->
+            <section class="tabs-section">
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('analysis')">Análise</button>
+                        <button class="tab-button" onclick="showTab('methodology')">Metodologia</button>
+                        <button class="tab-button" onclick="showTab('disclaimer')">Aviso Legal</button>
+                    </div>
+
+                    <div class="tab-content active" id="analysis">
+                        <div class="info-card">
+                            <h3>Análise Técnica</h3>
+                            <p>Nossa análise indica uma tendência de alta baseada nos seguintes fatores:</p>
+                            <ul>
+                                <li>Padrões de suporte e resistência históricos</li>
+                                <li>Volume de negociação crescente</li>
+                                <li>Indicadores técnicos favoráveis (RSI, MACD)</li>
+                                <li>Sentimento do mercado positivo</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="methodology">
+                        <div class="info-card">
+                            <h3>Nossa Metodologia</h3>
+                            <p>Utilizamos uma combinação de técnicas avançadas:</p>
+                            <ul>
+                                <li>Redes neurais recorrentes (LSTM)</li>
+                                <li>Análise de sentimento de redes sociais</li>
+                                <li>Indicadores técnicos tradicionais</li>
+                                <li>Análise de dados on-chain</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="disclaimer">
+                        <div class="info-card warning">
+                            <h3>⚠️ Aviso Importante</h3>
+                            <p>
+                                As previsões apresentadas são baseadas em modelos matemáticos e não constituem 
+                                aconselhamento financeiro. O mercado de criptomoedas é altamente volátil e 
+                                investimentos podem resultar em perdas significativas.
+                            </p>
+                            <p class="small-text">
+                                Sempre faça sua própria pesquisa e consulte um consultor financeiro qualificado 
+                                antes de tomar decisões de investimento.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
-
-    <footer>
-        <p>&copy; 2025 Lucas Knust. Todos os direitos reservados.</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>

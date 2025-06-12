@@ -1,460 +1,436 @@
-/* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Aplicando a fonte Aptos */
 body {
-    font-family: 'Roboto Mono', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #121212;
-    color: #ffffff;
-    text-align: center;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  color: #ffffff;
+  min-height: 100vh;
 }
 
-
-
-/* Header fixado sempre escuro */
-header {
-    background: #222;
-    color: #fff;
-    padding: 20px 0;
-    position: sticky; /* Permanece fixo no topo ao rolar */
-    top: 0;
-    z-index: 1000; /* Fica acima dos outros elementos */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* Ajustando o comportamento do header no modo claro */
-header.light-mode {
-    background-color: #222; /* Sempre escuro */
-    color: #fff;
+/* Header */
+.header {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #374151;
+  padding: 1rem 0;
 }
 
-/* Navegação no header */
-header nav {
-    display: inline-block;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-nav ul li {
-    margin: 0;
+.logo-icon {
+  background: #f97316;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2em;
+.logo-text h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }
 
-/* Botão de alternância de tema */
-header button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #ffd966;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #000;
-    border-radius: 5px;
+.logo-text p {
+  font-size: 0.875rem;
+  color: #94a3b8;
 }
 
-/* Bitcoin Section */
-.bitcoin-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-    max-width: 900px;
+.badge {
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid #f97316;
+  color: #f97316;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.bitcoin-image {
-    max-width: 150px;
-    margin-right: 20px;
+/* Main Content */
+.main {
+  padding: 2rem 0;
 }
 
-.bitcoin-text {
-    text-align: left;
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.sobre-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: justify;
-    margin: 20px auto;
-    max-width: 900px;
+.current-price {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
 }
 
-/* Serviços */
-.service {
-    margin: 40px auto; /* Espaçamento entre os serviços */
-    text-align: center; /* Centraliza os textos */
-    padding: 20px;
-    max-width: 800px; /* Define uma largura máxima para os serviços */
-    border: 1px solid #444; /* Opcional: borda para destacar */
-    border-radius: 10px;
-    background-color: #1e1e1e; /* Fundo sutil para destaque */
+.price-label {
+  color: #94a3b8;
+  font-size: 1.125rem;
 }
 
-.service h3 {
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
+/* Métricas */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.service form {
-    display: flex;
-    flex-direction: column; /* Itens empilhados verticalmente */
-    gap: 15px; /* Espaçamento entre os elementos */
-    align-items: center; /* Centraliza os elementos no eixo horizontal */
+.metric-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
 }
 
-.service label {
-    width: 100%; /* Faz o label ocupar toda a largura */
-    font-size: 14px;
-    color: #bbb;
+.metric-card:hover {
+  transform: translateY(-2px);
 }
 
-.service input {
-    width: 25%; /* Faz o input ocupar toda a largura */
-    max-width: 500px; /* Limita a largura do input */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.service table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
+.metric-title {
+  font-size: 0.875rem;
+  color: #cbd5e1;
 }
 
-.service table th, .service table td {
-    border: 1px solid #444;
-    padding: 10px;
-    text-align: center;
-    color: #fff;
+.metric-icon {
+  font-size: 1rem;
 }
 
-button {
-    font-family: 'Roboto Mono', monospace; /* Define a fonte Roboto Mono */
-    padding: 10px 20px;
-    background: #ffd966;
-    border: none;
-    border-radius: 5px;
-    color: #000;
-    font-size: 16px;
-    cursor: pointer;
-    width: auto; /* Ajusta a largura automaticamente */
-    letter-spacing: 1px; /* Espaçamento entre letras */
+.metric-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-.service button:hover {
-    background: #ffcd4d;
+.metric-change {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
 }
 
-/* Responsividade */
+.change-percent {
+  color: #10b981;
+}
+
+.metric-subtitle {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.confidence-bar {
+  width: 100%;
+  height: 8px;
+  background: #374151;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Chart Section */
+.chart-section {
+  margin-bottom: 2rem;
+}
+
+.chart-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-card,
+.prediction-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.card-header {
+  margin-bottom: 1.5rem;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-header p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.chart-wrapper {
+  height: 300px;
+  position: relative;
+}
+
+/* Prediction Card */
+.prediction-display {
+  margin-bottom: 1.5rem;
+}
+
+.prediction-current {
+  background: rgba(55, 65, 81, 0.5);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.prediction-header span:first-child {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+}
+
+.prediction-badge {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.prediction-price {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.prediction-percent {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.confidence-section {
+  margin-bottom: 1rem;
+}
+
+.confidence-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.confidence-header span:first-child {
+  color: #cbd5e1;
+}
+
+.confidence-header span:last-child {
+  font-weight: 600;
+}
+
+.predict-button {
+  width: 100%;
+  background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.predict-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.predict-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.predict-button.loading {
+  background: #6b7280;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Tabs */
+.tabs-section {
+  margin-bottom: 2rem;
+}
+
+.tab-buttons {
+  display: flex;
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 8px;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tab-button.active {
+  background: #374151;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.info-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.info-card.warning {
+  border-color: #fbbf24;
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.info-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-card.warning h3 {
+  color: #fbbf24;
+}
+
+.info-card p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.info-card ul {
+  color: #cbd5e1;
+  padding-left: 1.5rem;
+}
+
+.info-card li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.small-text {
+  font-size: 0.75rem !important;
+  color: #94a3b8 !important;
+}
+
+/* Loading Animation */
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .service form {
-        flex-direction: column; /* Mantém os itens empilhados em telas pequenas */
-    }
+  .chart-container {
+    grid-template-columns: 1fr;
+  }
 
-    .service input,
-    .service button {
-        width: 100%; /* Faz os inputs e botões ocuparem toda a largura */
-    }
-}
+  .metrics {
+    grid-template-columns: 1fr;
+  }
 
-/* Estilo para placeholders */
-input::placeholder,
-textarea::placeholder {
-    font-family: 'Roboto Mono', monospace; /* Define a fonte Roboto Mono */
-    font-size: 14px; /* Ajusta o tamanho da fonte */
-    color: #bbb; /* Define a cor do texto do placeholder */
-    font-style: italic; /* Opcional: deixa o placeholder em itálico */
-}
-
-footer.light-mode {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-footer.dark-mode {
-    background-color: #222;
-    color: #ffffff;
-}
-
-section {
-    scroll-margin-top: 140px; /* Ajuste o valor conforme a altura do header */
-}
-
-
-/* Tema escuro (padrão) */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-/* Tema claro */
-body.light-mode {
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-/* Estilo para o modo claro */
-body.light-mode .service {
-    border: 1px solid #ddd; /* Borda clara */
-    background-color: #f9f9f9; /* Fundo claro */
-    color: #333; /* Texto escuro no modo claro */
-}
-
-/* Ajuste dos campos de formulário no modo claro */
-body.light-mode input,
-body.light-mode button {
-    background-color: #fff; /* Fundo branco */
-    color: #333; /* Texto escuro */
-    border: 1px solid #ccc; /* Borda clara */
-}
-
-/* Botão no modo claro */
-body.light-mode button {
-    background-color: #ffd966;
-    color: #000; /* Texto preto */
-}
-
-body.light-mode button:hover {
-    background-color: #ffcd4d;
-}
-
-/* Para o título e texto dentro da seção */
-body.light-mode .service h3 {
-    color: #000; /* Título preto no modo claro */
-}
-
-header {
-    background: #222;
-    color: #fff;
-    padding: 20px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-header.light-mode {
-    background-color: #fff;
-    color: #000;
-}
-
-button#themeToggle {
-    background-color: #ffd966;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #000;
-    border-radius: 5px;
-}
-
-button#themeToggle:hover {
-    background-color: #ffcd4d;
-}
-
-#pricesSection {
-    margin: 20px auto;
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
     text-align: center;
-}
+  }
 
-#pricesLine {
-    width: 90%;
-    max-width: 600px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: "Roboto Mono", monospace;
-    font-size: 14px;
-    resize: none;
-}
-
-#copyPrices {
-    background: #ffd966;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#copyPrices:hover {
-    background: #ffcd4d;
-}
-
-.hidden {
-    display: none;
-}
-
-
-#pricesLine {
-    width: 90%;
-    max-width: 600px;
-    padding: 10px;
-    margin: 10px auto;
-    border-radius: 5px;
-    font-family: "Roboto Mono", monospace;
-    resize: none;
-    text-align: center;
-    background-color: #1e1e1e; /* Fundo escuro inicial */
-    color: #fff; /* Texto branco inicial */
-    border: 1px solid #444; /* Borda escura inicial */
-}
-
-/* Labels e inputs no modo escuro */
-#historyForm label,
-#historyForm input {
-    color: #fff; /* Texto branco */
-}
-
-#historyForm input {
-    background-color: #1e1e1e; /* Fundo escuro */
-    border: 1px solid #444; /* Borda escura */
-    color: #fff; /* Texto branco */
-}
-
-/* Labels e inputs no modo claro */
-body.light-mode #historyForm label,
-body.light-mode #historyForm input {
-    color: #333; /* Texto preto */
-}
-
-body.light-mode #historyForm input {
-    background-color: #f9f9f9; /* Fundo claro */
-    border: 1px solid #ddd; /* Borda clara */
-    color: #333; /* Texto preto */
-}
-
-/* Estilo geral dos inputs */
-#historyForm input {
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 10px;
-}
-
-/* Placeholder no modo escuro */
-#historyForm input::placeholder {
-    color: #aaa; /* Cor do placeholder no modo escuro */
-    opacity: 1; /* Garante que a opacidade seja consistente */
-}
-
-/* Placeholder no modo claro */
-body.light-mode #historyForm input::placeholder {
-    color: #666; /* Cor do placeholder no modo claro */
-    opacity: 1;
-}
-
-/* Labels e inputs no modo escuro */
-#predictForm label,
-#predictForm input {
-    color: #fff; /* Texto branco */
-}
-
-#predictForm input {
-    background-color: #1e1e1e; /* Fundo escuro */
-    border: 1px solid #444; /* Borda escura */
-    color: #fff; /* Texto branco */
-}
-
-/* Labels e inputs no modo claro */
-body.light-mode #predictForm label,
-body.light-mode #predictForm input {
-    color: #333; /* Texto preto */
-}
-
-body.light-mode #predictForm input {
-    background-color: #f9f9f9; /* Fundo claro */
-    border: 1px solid #ddd; /* Borda clara */
-    color: #333; /* Texto preto */
-}
-
-/* Estilo geral dos inputs */
-#predictForm input {
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 10px;
-}
-
-/* Placeholder no modo escuro */
-#predictForm input::placeholder {
-    color: #aaa; /* Cor do placeholder no modo escuro */
-    opacity: 1; /* Garante que a opacidade seja consistente */
-}
-
-/* Placeholder no modo claro */
-body.light-mode #predictForm input::placeholder {
-    color: #666; /* Cor do placeholder no modo claro */
-    opacity: 1;
-}
-
-/* Espaçamento adicional no rodapé */
-footer {
-    margin-top: 50px; /* Aumenta a distância entre o último conteúdo e o rodapé */
-    padding-top: 20px; /* Opcional: adiciona espaçamento interno */
-    text-align: center;
-    color: #fff;
-    background-color: #222; /* Fundo escuro para o rodapé */
-}
-
-/* Ajustando o título "Contato" */
-#contato h2 {
-    margin-bottom: 20px; /* Espaçamento menor para manter a seção compacta */
-    font-size: 2em; /* Tamanho maior para destaque */
-    text-align: center; /* Centraliza o título */
-}
-
-/* Ajustando o parágrafo */
-#contato p {
-    margin: 10px auto; /* Espaçamento superior e inferior */
-    max-width: 800px; /* Limita a largura para melhor leitura */
-    text-align: center; /* Centraliza o texto */
-    line-height: 1.6; /* Melhora o espaçamento entre linhas */
-    font-size: 1.1em; /* Aumenta levemente o tamanho do texto */
-    color: #ccc; /* Cor sutil para contraste no modo escuro */
-}
-
-/* Link do e-mail */
-#contato a {
-    color: #ffd966; /* Cor do link */
-    text-decoration: none; /* Remove o sublinhado */
-    font-weight: bold; /* Dá destaque ao e-mail */
-}
-
-#contato a:hover {
-    text-decoration: underline; /* Adiciona sublinhado no hover */
-    color: #ffcd4d; /* Cor mais clara ao passar o mouse */
-}
-
-/* Labels e inputs no modo claro */
-body.light-mode #contato p,
-body.light-mode #contato h2 {
-    color: #333; /* Texto preto */
-}
-
-body.light-mode #contato a {
-    background-color: #f9f9f9; /* Fundo claro */
-    border: 2px solid #ddd; /* Borda clara */
-    color: #333; /* Texto preto */
+  .tab-buttons {
+    flex-direction: column;
+  }
 }

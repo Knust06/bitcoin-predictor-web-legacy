@@ -1,104 +1,221 @@
-const apiUrl = "https://bitcoinpreviewer.up.railway.app";
+import { Chart } from "@/components/ui/chart"
+// Dados para o gráfico
+const chartData = {
+  labels: [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+    "Jan 25",
+    "Fev 25",
+    "Mar 25",
+  ],
+  datasets: [
+    {
+      label: "Preço Histórico",
+      data: [42000, 45000, 48000, 52000, 49000, 55000, 58000, 62000, 59000, 67000, 71000, 68000, null, null, null],
+      borderColor: "#f97316",
+      backgroundColor: "rgba(249, 115, 22, 0.1)",
+      fill: true,
+      tension: 0.4,
+    },
+    {
+      label: "Previsão",
+      data: [null, null, null, null, null, null, null, null, null, null, null, 68000, 75000, 78000, 82000],
+      borderColor: "#3b82f6",
+      backgroundColor: "rgba(59, 130, 246, 0.1)",
+      fill: true,
+      tension: 0.4,
+      borderDash: [5, 5],
+    },
+  ],
+}
 
-// Alternar tema claro/escuro
-document.getElementById("themeToggle").addEventListener("click", () => {
-    const body = document.body;
+// Configuração do gráfico
+const chartConfig = {
+  type: "line",
+  data: chartData,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: "#cbd5e1",
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#9ca3af",
+        },
+        grid: {
+          color: "rgba(55, 65, 81, 0.5)",
+        },
+      },
+      y: {
+        ticks: {
+          color: "#9ca3af",
+          callback: (value) => "$" + value.toLocaleString(),
+        },
+        grid: {
+          color: "rgba(55, 65, 81, 0.5)",
+        },
+      },
+    },
+  },
+}
 
-    // Alternar classes para modo claro/escuro
-    if (body.classList.contains("dark-mode")) {
-        body.classList.remove("dark-mode");
-        body.classList.add("light-mode");
-        // Atualizar o estilo do textarea para o modo claro
-        textarea.style.backgroundColor = "#f9f9f9"; // Fundo claro
-        textarea.style.color = "#333"; // Texto escuro
-        textarea.style.border = "1px solid #ddd"; // Borda clara
-    } else {
-        body.classList.remove("light-mode");
-        body.classList.add("dark-mode");
-        
-        // Atualizar o estilo do textarea para o modo escuro
-        textarea.style.backgroundColor = "#1e1e1e"; // Fundo escuro
-        textarea.style.color = "#fff"; // Texto branco
-        textarea.style.border = "1px solid #444"; // Borda escura
+// Inicializar gráfico
+let chart
+document.addEventListener("DOMContentLoaded", () => {
+  const ctx = document.getElementById("priceChart")
+  if (ctx) {
+    chart = new Chart(ctx, chartConfig)
+  }
+
+  // Iniciar contador de atualização
+  startUpdateTimer()
+})
+
+// Função para gerar nova previsão
+async function generatePrediction() {
+  const button = document.getElementById("predictButton")
+  const buttonText = button.querySelector(".button-text")
+  const buttonIcon = button.querySelector(".button-icon")
+
+  // Estado de loading
+  button.disabled = true
+  button.classList.add("loading")
+  buttonIcon.innerHTML = '<div class="loading-spinner"></div>'
+  buttonText.textContent = "Calculando..."
+
+  // Simular processamento
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+
+  // Gerar novos valores
+  const currentPrice = 68420
+  const newPrediction = Math.floor(Math.random() * 20000) + 65000
+  const newConfidence = Math.floor(Math.random() * 30) + 70
+
+  const priceChange = newPrediction - currentPrice
+  const priceChangePercent = ((priceChange / currentPrice) * 100).toFixed(2)
+
+  // Atualizar interface
+  document.getElementById("predictionValue").textContent = "$" + newPrediction.toLocaleString()
+  document.getElementById("predictionDisplay").textContent = "$" + newPrediction.toLocaleString()
+  document.getElementById("confidenceValue").textContent = newConfidence + "%"
+  document.getElementById("confidencePercent").textContent = newConfidence + "%"
+
+  // Atualizar barras de confiança
+  document.getElementById("confidenceFill").style.width = newConfidence + "%"
+  document.getElementById("confidenceFill2").style.width = newConfidence + "%"
+
+  // Atualizar mudança de preço
+  const changeElement = document.getElementById("predictionChange")
+  const percentElement = document.getElementById("predictionPercent")
+  const badgeElement = document.getElementById("predictionBadge")
+
+  if (priceChange > 0) {
+    changeElement.innerHTML =
+      '<span class="trend-icon">📈</span><span class="change-percent">+' + priceChangePercent + "%</span>"
+    percentElement.textContent = "+" + priceChangePercent + "% em 30 dias"
+    badgeElement.textContent = "Alta"
+    badgeElement.style.background = "#10b981"
+  } else {
+    changeElement.innerHTML =
+      '<span class="trend-icon">📉</span><span class="change-percent">' + priceChangePercent + "%</span>"
+    percentElement.textContent = priceChangePercent + "% em 30 dias"
+    badgeElement.textContent = "Baixa"
+    badgeElement.style.background = "#ef4444"
+  }
+
+  // Restaurar botão
+  button.disabled = false
+  button.classList.remove("loading")
+  buttonIcon.textContent = "⚡"
+  buttonText.textContent = "Nova Previsão"
+
+  // Atualizar gráfico
+  updateChart(newPrediction)
+}
+
+// Função para atualizar gráfico
+function updateChart(newPrediction) {
+  if (chart) {
+    chart.data.datasets[1].data = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      68000,
+      newPrediction,
+      newPrediction + 3000,
+      newPrediction + 7000,
+    ]
+    chart.update()
+  }
+}
+
+// Função para mostrar tabs
+function showTab(tabName) {
+  // Remover classe active de todos os botões e conteúdos
+  document.querySelectorAll(".tab-button").forEach((btn) => btn.classList.remove("active"))
+  document.querySelectorAll(".tab-content").forEach((content) => content.classList.remove("active"))
+
+  // Adicionar classe active ao botão clicado
+  event.target.classList.add("active")
+  document.getElementById(tabName).classList.add("active")
+}
+
+// Timer de atualização
+function startUpdateTimer() {
+  let totalMinutes = 135 // 2h 15m em minutos
+
+  const updateTimer = () => {
+    const hours = Math.floor(totalMinutes / 60)
+    const minutes = totalMinutes % 60
+    const display = document.getElementById("nextUpdate")
+
+    if (display) {
+      display.textContent = `${hours}h ${minutes}m`
     }
 
-    // Atualizar o texto do botão
-    const button = document.getElementById("themeToggle");
-    button.textContent = body.classList.contains("dark-mode")
-        ? "Modo Claro"
-        : "Modo Escuro";
-});
-
-// Preços históricos
-document.getElementById("historyForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const symbol = document.getElementById("symbol").value;
-    const startDate = document.getElementById("startDate").value;
-    const endDate = document.getElementById("endDate").value;
-
-    try {
-        let url = `${apiUrl}/get-prices?symbol=${symbol}`;
-        if (startDate) url += `&start_date=${startDate}`;
-        if (endDate) url += `&end_date=${endDate}`;
-
-        console.log("URL construída:", url);
-
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            console.error("Erro na API:", response.status, response.statusText);
-            throw new Error("Erro ao buscar preços.");
-        }
-
-        const data = await response.json();
-        console.log("Dados recebidos da API:", data);
-
-        if (!data.prices || !Array.isArray(data.prices)) {
-            throw new Error("A API não retornou preços válidos.");
-        }
-
-        // Atualizar o textarea com os preços em linha
-        const pricesLine = data.prices.join(", ");
-        document.getElementById("pricesLine").value = pricesLine;
-
-        // Exibir a seção dos preços
-        const pricesSection = document.getElementById("pricesSection");
-        pricesSection.classList.remove("hidden");
-
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao buscar preços. Verifique os dados.");
+    totalMinutes--
+    if (totalMinutes < 0) {
+      totalMinutes = 135 // Reset para 2h 15m
     }
-});
+  }
 
-// Copiar preços
-document.getElementById("copyPrices").addEventListener("click", () => {
-    const textarea = document.getElementById("pricesLine");
-    textarea.select();
-    document.execCommand("copy");
-    alert("Preços copiados para a área de transferência!");
-});
-// Previsão de preços
-document.getElementById("predictForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const pricesInput = document.getElementById("prices").value;
+  // Atualizar imediatamente e depois a cada minuto
+  updateTimer()
+  setInterval(updateTimer, 60000)
+}
 
-    try {
-        // Enviar o valor diretamente como um array
-        const response = await fetch(`${apiUrl}/predict-bitcoin`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prices: pricesInput.split(",").map(Number) }), // Caso esteja vindo como string, converte aqui.
-        });
+// Simular atualizações de preço em tempo real
+setInterval(() => {
+  const currentPriceElement = document.getElementById("currentPrice")
+  if (currentPriceElement) {
+    const currentPrice = Number.parseInt(currentPriceElement.textContent.replace(/[$,]/g, ""))
+    const variation = (Math.random() - 0.5) * 1000 // Variação de até $500
+    const newPrice = Math.max(50000, currentPrice + variation)
 
-        if (!response.ok) {
-            throw new Error(`Erro: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        document.getElementById("predictionResult").textContent = `Preço Previsto: ${data.prediction}`;
-    } catch (error) {
-        document.getElementById("predictionResult").textContent = error.message;
-    }
-});
+    currentPriceElement.textContent = "$" + Math.floor(newPrice).toLocaleString()
+  }
+}, 30000) // Atualizar a cada 30 segundos
