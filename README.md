@@ -1,56 +1,56 @@
 # Bitcoin Price Predictor — Legacy Web Client
 
-Cliente web estático criado como primeira interface para a API experimental de preços e previsão de Bitcoin desenvolvida durante um projeto acadêmico da FIAP.
+Personal and academic web client built with HTML, CSS, and JavaScript for an experimental FastAPI Bitcoin price API.
 
-> Esta é a versão legada em HTML, CSS e JavaScript. A versão mais recente da interface está no repositório [`novo_bitcoin_site`](https://github.com/Knust06/novo_bitcoin_site).
+This repository preserves the original frontend as a record of the project's evolution. The current Next.js and TypeScript client is available at [`Knust06/bitcoin-predictor-web`](https://github.com/Knust06/bitcoin-predictor-web).
 
-## Funcionalidades
+## Features
 
-- consulta de preços históricos por símbolo e intervalo de datas;
-- cópia dos preços retornados pela API;
-- envio de uma série de preços para o endpoint de previsão;
-- alternância entre tema claro e escuro;
-- interface responsiva sem etapa de build.
+- Query historical prices by asset symbol and date range
+- Copy historical price series returned by the API
+- Send price series to the experimental prediction endpoint
+- Switch between light and dark themes
+- Run as a responsive static page with no build step
 
-## Tecnologias
+## Technologies
 
 - HTML5
 - CSS3
 - JavaScript
 - Fetch API
-- FastAPI no backend externo
+- External FastAPI backend
 
-## Executando localmente
+## Running locally
 
-Você pode abrir `index.html` diretamente ou iniciar um servidor estático:
+Open `index.html` directly in a browser or start a local static server:
 
 ```bash
 python -m http.server 8080
 ```
 
-Depois, acesse `http://localhost:8080`.
+Then visit `http://localhost:8080`.
 
-## Configuração da API
+## API configuration
 
-A URL do backend está definida em `script.js`:
+The backend URL is defined in `script.js`:
 
 ```javascript
 const apiUrl = "https://bitcoinpreviewer.up.railway.app";
 ```
 
-Altere esse valor para apontar para outra instância da API. O cliente utiliza principalmente:
+Change this value to use a different API instance. The client consumes:
 
 - `GET /get-prices`
 - `POST /predict-bitcoin`
 
-## Status
+## Project scope
 
-Protótipo pessoal e acadêmico mantido como referência da primeira implementação. Para evoluções de interface, use a versão em Next.js e TypeScript.
+This is a personal and academic project. It is retained as the legacy implementation and is not production software. Professional source code is maintained in private Azure Repos and is not published here.
 
-## Aviso
+## Financial disclaimer
 
-O modelo e as previsões são experimentais e não constituem recomendação financeira. Mercados de criptoativos são voláteis, e resultados passados ou simulados não garantem desempenho futuro.
+The model and its predictions are experimental and do not constitute financial advice. Cryptocurrency markets are volatile, and simulated or past results do not guarantee future performance.
 
-## Autor
+## Author
 
 [Lucas Knust](https://www.linkedin.com/in/lucas-knust/)

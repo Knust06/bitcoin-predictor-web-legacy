@@ -38,8 +38,9 @@
         <section id="sobre">
             <h2>Sobre o Criador</h2>
             <div class="sobre-section">
-                <p>Meu nome é Lucas Knust. Sou Analista de Sistemas com foco em C#/.NET, APIs REST, integrações e automação de processos.</p>
-                <p>Sou formado em Ciência da Computação, pós-graduado em Machine Learning Engineering pela FIAP e atualmente curso uma segunda pós-graduação em AI Agents.</p>
+                <p><strong>System Analyst | C#/.NET | REST APIs &amp; Automation | Applied AI</strong></p>
+                <p>Meu nome é Lucas Knust. Sou Analista de Sistemas com foco em aplicações corporativas, C#/.NET, APIs REST, integrações e automação de processos.</p>
+                <p>Sou bacharel em Ciência da Computação pela Universidade Veiga de Almeida, concluí a pós-graduação em Machine Learning Engineering na FIAP e atualmente curso uma segunda pós-graduação voltada a AI Agents na FIAP.</p>
                 <p>Este é um projeto pessoal e acadêmico que consome uma API experimental de previsão de preços. Os repositórios públicos deste perfil não contêm código profissional; o código utilizado no trabalho é mantido em Azure Repos privados.</p>
             </div>
         </section>
@@ -90,9 +91,10 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Lucas Knust. Todos os direitos reservados.</p>
+        <p>&copy; <span id="currentYear">2026</span> Lucas Knust. Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
+    <script>document.getElementById("currentYear").textContent = new Date().getFullYear();</script>
 </body>
 </html>
