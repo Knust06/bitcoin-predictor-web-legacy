@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Price Preview</title>
+    <title>Bitcoin Price Predictor</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
@@ -39,41 +38,36 @@
         <section id="sobre">
             <h2>Sobre o Criador</h2>
             <div class="sobre-section">
-                <p>Meu nome é Lucas Knust, sou entusiasta de tecnologia e formado em Ciência da Computação. Atualmente, estou concluindo uma pós-graduação em Machine Learning Engineering, com foco em explorar o potencial da inteligência artificial para resolver problemas do mundo real.
-
-                    Atuo como Analista de Sistemas C#, desenvolvendo soluções para o mercado financeiro, onde ganho experiência prática com tecnologias avançadas e requisitos críticos de negócios.
-                    
-                    Este projeto é fruto da minha paixão por tecnologia e aprendizado constante. A API que alimenta este site foi desenvolvida como parte da minha especialização em Machine Learning e tem como objetivo prever o valor do Bitcoin para o dia seguinte, utilizando técnicas modernas de aprendizado de máquina.
-                    
-                    Além do trabalho e dos estudos, sou entusiasta de jogos, mercado financeiro e, principalmente, de tecnologia, acreditando sempre no impacto positivo que ela pode trazer para a sociedade.</p>
-            </div>            
+                <p><strong>System Analyst | C#/.NET | REST APIs &amp; Automation | Applied AI</strong></p>
+                <p>Meu nome é Lucas Knust. Sou Analista de Sistemas com foco em aplicações corporativas, C#/.NET, APIs REST, integrações e automação de processos.</p>
+                <p>Sou bacharel em Ciência da Computação pela Universidade Veiga de Almeida, concluí a pós-graduação em Machine Learning Engineering na FIAP e atualmente curso uma segunda pós-graduação voltada a AI Agents na FIAP.</p>
+                <p>Este é um projeto pessoal e acadêmico que consome uma API experimental de previsão de preços. Os repositórios públicos deste perfil não contêm código profissional; o código utilizado no trabalho é mantido em Azure Repos privados.</p>
+            </div>
         </section>
 
         <section id="servicos">
-            <h2>Serviços</h2>        
+            <h2>Serviços</h2>
             <div class="service">
                 <h3>Preços Históricos</h3>
-                
+
                 <form id="historyForm">
                     <label for="symbol">Símbolo do Ativo:</label>
                     <input type="text" id="symbol" placeholder="Bitcoin: BTC-USD" required>
-                    
+
                     <label for="startDate">Data Inicial (opcional):</label>
-                    <input type="text" id="startDate" placeholder="yyyy-mm-dd" pattern="\d{4}-\d{2}-\d{2}" placeholder="Formato: yyyy-mm-dd">
-                    
+                    <input type="date" id="startDate">
+
                     <label for="endDate">Data Final (opcional):</label>
-                    <input type="text" id="endDate" placeholder="yyyy-mm-dd" pattern="\d{4}-\d{2}-\d{2}" placeholder="Formato: yyyy-mm-dd">
-                    
+                    <input type="date" id="endDate">
+
                     <button type="submit">Buscar Preços</button>
                 </form>
                 <div id="pricesSection" class="hidden">
                     <textarea id="pricesLine" readonly></textarea>
                     <button id="copyPrices">Copiar Preços</button>
                 </div>
-                            
             </div>
 
-        
             <div class="service">
                 <h3>Previsão de Preços</h3>
                 <form id="predictForm">
@@ -84,18 +78,23 @@
                 <p id="predictionResult"></p>
             </div>
         </section>
-        
 
         <section id="contato">
             <h2>Contato</h2>
-            <p>Entre em contato comigo pelo email se tem alguma sugestão, encontrou algum bug ou alguma melhoria: <a href="mailto:lucasknustcontato@outlook.com">lucasknustcontato@outlook.com</a></p>
+            <p>
+                Contato profissional:
+                <a href="https://www.linkedin.com/in/lucas-knust/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                ou
+                <a href="https://github.com/Knust06" target="_blank" rel="noopener noreferrer">GitHub</a>.
+            </p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Lucas Knust. Todos os direitos reservados.</p>
+        <p>&copy; <span id="currentYear">2026</span> Lucas Knust. Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
+    <script>document.getElementById("currentYear").textContent = new Date().getFullYear();</script>
 </body>
 </html>
