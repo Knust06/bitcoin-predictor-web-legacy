@@ -38,6 +38,8 @@ The backend URL is defined in `script.js`:
 const apiUrl = "https://bitcoinpreviewer.up.railway.app";
 ```
 
+> This hosted API is no longer online (checked on 2026-10-20). The backend code lives in [`fiap-ml-engineering-tech-challenges/Part-4`](https://github.com/Knust06/fiap-ml-engineering-tech-challenges/tree/main/Part-4).
+
 Change this value to use a different API instance. The client consumes:
 
 - `GET /get-prices`
